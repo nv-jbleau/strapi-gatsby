@@ -24,7 +24,6 @@ const renderList = (props) => (
       const data = page.node;
       return (
         <div key={data.id}>
-          <Outlet />
             <Link key={data.id} to={`/recipes/${data.id}`}>{data.title} </Link>
         </div>
       )

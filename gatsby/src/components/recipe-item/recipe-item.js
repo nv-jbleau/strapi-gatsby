@@ -21,7 +21,7 @@ query {
 const render = (props) => {
     console.log('hi', props)
     return (
-      props.allStrapiRecipe.edges.map(node => {
+      props.allStrapiRecipes.edges.map(node => {
         console.log('node', node.node)
         const data = node.node;
         const imgUrl = data.thumbnail.map(details => details.url);
