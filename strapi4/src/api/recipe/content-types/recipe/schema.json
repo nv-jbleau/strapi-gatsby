@@ -38,6 +38,11 @@
       "type": "integer",
       "required": true,
       "default": 0
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

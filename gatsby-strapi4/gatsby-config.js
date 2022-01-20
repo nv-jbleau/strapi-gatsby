@@ -39,11 +39,17 @@ module.exports = {
       options: {
         apiURL: "http://localhost:1337",
         collectionTypes: [
-          `recipe`
+          {
+            name: `recipe`,
+            endpoint: `api/recipes?populate=\*` 
+          },
+          {
+            name: `category`,
+            endpoint: `api/categories`
+          }
         ],
         queryLimit: 1000,
       },
-    },
-    
+    },    
   ],
 }
