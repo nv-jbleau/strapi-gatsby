@@ -1,9 +1,11 @@
 const path = require(`path`)
+
 // Log out information after a build is done
 exports.onPostBuild = ({ reporter }) => {
   reporter.info(`Your Gatsby site has been built!`)
 }
-// Create blog pages dynamically
+
+// Create recipe pages dynamically
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
   const recipeDetailTemplate = path.resolve(`src/templates/recipe-item.js`)
@@ -17,6 +19,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 name
                 slug
                 description
+                thumbnail {
+                  data {
+                    attributes {
+                      localFile {
+                        childImageSharp {
+                          gatsbyImageData(
+                            width: 250
+                            height: 300
+                            placeholder: BLURRED
+                          )
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -27,7 +44,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   result.data.allStrapiRecipe.edges.forEach(edge => {
     edge.node.data.map(data => {
 
-      const res = JSON.stringify(data.attributes.slug)
+      const res = JSON.stringify(data.attributes)
       reporter.log('********************************' + res)
   
       createPage({
