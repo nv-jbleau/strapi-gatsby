@@ -45,7 +45,7 @@ module.exports = {
           },
           {
             name: `category`,
-            endpoint: `api/categories`
+            endpoint: `api/categories?populate=\*`
           }
         ],
         queryLimit: 1000,

@@ -5,6 +5,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import RecipeList from "../components/recipe-list/recipe-list"
+import CategoryList from "../components/category-list/category-list"
 
 
 const query = graphql`
@@ -35,10 +36,13 @@ const query = graphql`
 const IndexPage = () => (
   <Layout>
     <Seo title="Home" />
+    <h2>Recipe</h2>
     <StaticQuery
       query={query}
       render={ queryData => <RecipeList queryData={queryData}/>}
     />
+    <h2>Category</h2>
+    <CategoryList/>
     {/* <p>
       <Link to="/page-2/">Go to page 2</Link> <br />
       <Link to="/using-typescript/">Go to "Using TypeScript"</Link> <br />

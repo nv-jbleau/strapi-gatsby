@@ -8,8 +8,9 @@ exports.onPostBuild = ({ reporter }) => {
 // Create recipe pages dynamically
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
+  
   const recipeDetailTemplate = path.resolve(`src/templates/recipe-item.js`)
-  const result = await graphql(`
+  const recipeResult = await graphql(`
     query {
       allStrapiRecipe {
         edges {
@@ -41,12 +42,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `)
-  result.data.allStrapiRecipe.edges.forEach(edge => {
-    edge.node.data.map(data => {
 
-      const res = JSON.stringify(data.attributes)
-      reporter.log('********************************' + res)
-  
+  recipeResult.data.allStrapiRecipe.edges.forEach(edge => {
+    edge.node.data.map(data => {
+      // const res = JSON.stringify(data.attributes)
+      // reporter.log('********************************' + res)
       createPage({
         path: `/recipes/${data.attributes.slug}`,
         component: recipeDetailTemplate,
@@ -56,4 +56,45 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   })
+
+  const categoryDetailTemplate = path.resolve(`src/templates/category-item.js`)
+  const categoryResults = await graphql(`
+    query {
+      allStrapiCategory {
+        edges {
+          node {
+            data {
+              attributes {
+                recipes {
+                  data {
+                    attributes {
+                      slug
+                      name
+                    }
+                  }
+                }
+                name
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  categoryResults.data.allStrapiCategory.edges.forEach(edge => {
+    edge.node.data.map(data=> {
+      const res = JSON.stringify(data.attributes)
+      reporter.log('********************************' + res)
+      createPage({
+        path:`/categories/${data.attributes.slug}`,
+        component: categoryDetailTemplate,
+        context: {
+          category: data.attributes,
+        },
+      })
+    })
+  })
+
 }

@@ -22,6 +22,11 @@
       "relation": "manyToMany",
       "target": "api::recipe.recipe",
       "mappedBy": "categories"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }
