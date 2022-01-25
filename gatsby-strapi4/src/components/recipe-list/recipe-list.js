@@ -1,19 +1,19 @@
 import { StaticQuery, graphql, Link } from "gatsby"
 import * as React from "react"
 
-const RecipeList = (props) => (
-  props.queryData.allStrapiRecipe.nodes.map(node => {
-    return node.data.map(data => {
-    console.log('data', data)
-    const { name, slug } = data.attributes;
+const RecipeList = (props) => {
+  return props.list.map(data => {
+   return data.map(dataObj => { 
+     console.log(dataObj)
+    const { name, slug, id } = dataObj.attributes;
       return (
-        <div key={data.id}>
-            <Link key={data.id} to={`/recipes/${slug}`}>{name} </Link>
+        <div key={dataObj.id}>
+            <Link key={dataObj.id} to={`/recipes/${slug}`}>{name} </Link>
         </div>
       )
     })
   })
-);
+};
   
 
 

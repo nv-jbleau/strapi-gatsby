@@ -1,21 +1,30 @@
 import * as React from "react"
 import Layout from "../components/layout";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
 
+
+const renderList = (recipes) => {
+  return recipes.data.map(recipe => {
+    const {slug, name} = recipe.attributes
+    return (
+      <div id={name}>
+        <Link to={`/recipes/${slug}`}>{name}</Link>
+      </div>
+    )
+  })
+}
 
 const CategoryItem = ({pageContext}) => {
   console.log('context', pageContext)
 
-  // const {name, description, thumbnail} = pageContext.recipe;
+  const {name, recipes} = pageContext.category;
 
   // const image = getImage(thumbnail.data.attributes.localFile);
     return(
       <Layout>
         <div>
-          Hi
-          {/* <h1>{name}</h1>
-          <GatsbyImage image={image} alt={name}/>
-          <p>{description}</p> */}
+          <h1>{name}</h1>
+            {renderList(recipes)}
         </div>
       </Layout>
     )

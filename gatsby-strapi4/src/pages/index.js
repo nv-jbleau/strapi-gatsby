@@ -33,13 +33,21 @@ const query = graphql`
   }
 `;
 
+
 const IndexPage = () => (
   <Layout>
     <Seo title="Home" />
     <h2>Recipe</h2>
     <StaticQuery
       query={query}
-      render={ queryData => <RecipeList queryData={queryData}/>}
+      render={
+         queryData =>
+          <RecipeList
+           list={
+             queryData.allStrapiRecipe.nodes.map(node => node.data)
+            }
+          />
+        }
     />
     <h2>Category</h2>
     <CategoryList/>
