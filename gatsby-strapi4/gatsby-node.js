@@ -86,8 +86,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   categoryResults.data.allStrapiCategory.edges.forEach(edge => {
     edge.node.data.map(data=> {
-      const res = JSON.stringify(data.attributes)
-      reporter.log('********************************' + res)
+      // const res = JSON.stringify(data.attributes)
+      // reporter.log('********************************' + res)
       createPage({
         path:`/categories/${data.attributes.slug}`,
         component: categoryDetailTemplate,
