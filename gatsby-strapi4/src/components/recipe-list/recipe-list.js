@@ -1,20 +1,27 @@
-import { StaticQuery, graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 import * as React from "react"
 
-const RecipeList = (props) => {
-  return props.list.map(data => {
-   return data.map(dataObj => { 
-     console.log(dataObj)
-    const { name, slug, id } = dataObj.attributes;
+const renderListItem = (props) => {
+  return props.list.edges.map(edge => {
+    return edge.node.data.map(data =>{
+      const {name, slug, locale} = data.attributes
       return (
-        <div key={dataObj.id}>
-            <Link key={dataObj.id} to={`/recipes/${slug}`}>{name} </Link>
+        <div key={data.id}>
+            <Link key={data.id} to={`${locale}/${slug}`}>{name} </Link>
         </div>
       )
     })
   })
 };
-  
 
+
+const RecipeList = (props) => {
+  return (
+    <div>
+      <h2>Recipes</h2>
+      {renderListItem(props)}
+    </div>
+  )
+}
 
 export default RecipeList

@@ -7,6 +7,7 @@ const RecipeDetails = ({pageContext}) => {
   console.log('context', pageContext)
 
   const {name, description, thumbnail} = pageContext.recipe;
+  console.log('pageContext', pageContext)
 
   const image = getImage(thumbnail.data.attributes.localFile);
   console.log('image', image)
