@@ -1,6 +1,7 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import LangSwitch from "./lang-switch/lang-switch"
 
 const Header = ({ siteTitle }) => (
   <header
@@ -27,6 +28,7 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      <LangSwitch/>
     </div>
   </header>
 )

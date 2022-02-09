@@ -10,4 +10,3 @@ export const useRedirectToHomepage = () => {
 
   return null;
 }
-
